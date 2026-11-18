@@ -1,0 +1,559 @@
+
+/* =========================================
+   1. THEME COLORS
+========================================= */
+
+:root {
+    --ivory: #f8f5ee;
+    --gold: #b49a67;
+    --sage: #586b5c;
+    --ink: #344139;
+    --muted: #777c70;
+}
+
+/* =========================================
+   2. GLOBAL STYLES
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--ivory);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+}
+
+button,
+a {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin-top: 0;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
+}
+
+h1 {
+    font-size: clamp(57px, 12vw, 78px);
+    line-height: 0.88;
+    margin: 32px 0 22px;
+}
+
+h1 span {
+    display: block;
+    font-size: 0.55em;
+    font-style: italic;
+    color: var(--gold);
+    margin: 10px 0;
+}
+
+h2 {
+    font-size: 49px;
+    line-height: 1.05;
+    margin: 14px 0 18px;
+}
+
+h3 {
+    font-size: 31px;
+}
+
+/* =========================================
+   3. MAIN WEBSITE CONTAINER
+========================================= */
+
+.shell {
+    max-width: 520px;
+    margin: auto;
+    min-height: 100vh;
+    overflow: hidden;
+
+    background: linear-gradient(
+        150deg,
+        #fffdf8,
+        #f6f1e7
+    );
+
+    box-shadow: 0 0 70px #3b3b3210;
+}
+
+/* =========================================
+   4. INTRO / INVITATION COVER
+========================================= */
+
+.intro {
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    padding: 28px 22px;
+    position: relative;
+
+    background: radial-gradient(
+        ellipse at 50% 35%,
+        #fffefb,
+        #f4eddf
+    );
+}
+
+.frame {
+    border: 1px solid #cbb78d;
+    position: relative;
+    text-align: center;
+
+    padding: 62px 18px 54px;
+    width: 100%;
+    max-width: 430px;
+    min-height: 640px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.frame::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border: 1px solid #d9cbaa;
+    pointer-events: none;
+}
+
+.petal {
+    position: absolute;
+    font-size: 60px;
+    color: #b5a47988;
+    font-family: Georgia, serif;
+    pointer-events: none;
+}
+
+.petal.one {
+    top: 13px;
+    left: 12px;
+    transform: rotate(-35deg);
+}
+
+.petal.two {
+    bottom: 13px;
+    right: 12px;
+    transform: rotate(145deg);
+}
+
+/* =========================================
+   5. ENVELOPE ANIMATION
+========================================= */
+
+.envelope {
+    width: 170px;
+    height: 110px;
+    background: #e7d9bc;
+
+    position: relative;
+    margin: 0 auto 24px;
+
+    box-shadow: 0 12px 30px #655f4d24;
+    border: 1px solid #c8b68e;
+
+    transition: transform 0.7s;
+}
+
+.envelope::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+
+    clip-path: polygon(
+        0 0,
+        50% 58%,
+        100% 0
+    );
+
+    background: #f4ead7;
+    z-index: 2;
+
+    transform-origin: top;
+    transition: transform 0.7s;
+}
+
+.envelope::after {
+    content: '✦';
+
+    position: absolute;
+    left: 50%;
+    top: 49%;
+
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+
+    background: var(--sage);
+    color: #f6ead4;
+
+    width: 32px;
+    height: 32px;
+
+    display: grid;
+    place-items: center;
+
+    z-index: 3;
+}
+
+.opened .envelope {
+    transform: translateY(-18px) scale(0.95);
+}
+
+.opened .envelope::before {
+    transform: rotateX(175deg);
+}
+
+/* =========================================
+   6. TYPOGRAPHY / DECORATIONS
+========================================= */
+
+.ornament {
+    font-family: Georgia, serif;
+    color: var(--gold);
+    font-size: 38px;
+    letter-spacing: 12px;
+}
+
+.eyebrow {
+    letter-spacing: 0.27em;
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--sage);
+}
+
+.date {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 27px;
+    letter-spacing: 0.08em;
+}
+
+.divider {
+    height: 1px;
+    width: 70px;
+    background: var(--gold);
+    margin: 20px auto;
+}
+
+.flourish {
+    font-family: Georgia, serif;
+    font-size: 34px;
+    color: var(--gold);
+}
+
+.small {
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--muted);
+}
+
+.note {
+    font-size: 12px;
+    color: #7c806f;
+    line-height: 1.7;
+}
+
+/* =========================================
+   7. BUTTONS
+========================================= */
+
+.btn {
+    display: inline-block;
+
+    border: 1px solid var(--sage);
+    background: var(--sage);
+    color: white;
+
+    text-decoration: none;
+    border-radius: 2px;
+
+    padding: 15px 24px;
+
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    transition:
+        transform 0.2s,
+        background 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    background: #3e5143;
+}
+
+.btn.secondary {
+    background: transparent;
+    color: var(--sage);
+}
+
+.intro .btn {
+    margin-top: 30px;
+}
+
+/* =========================================
+   8. MAIN CONTENT ANIMATION
+========================================= */
+
+.main {
+    display: none;
+    animation: appear 1s ease both;
+}
+
+.opened .main {
+    display: block;
+}
+
+.opened .intro {
+    display: none;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================
+   9. SECTIONS
+========================================= */
+
+section {
+    padding: 80px 32px;
+    text-align: center;
+}
+
+.hero {
+    padding-top: 100px;
+    padding-bottom: 100px;
+
+    background: linear-gradient(
+        #faf7ef,
+        #f2ecdf
+    );
+}
+
+.hero h1 {
+    margin: 30px 0;
+}
+
+/* =========================================
+   10. COUPLE PHOTO
+========================================= */
+
+.photo {
+    width: min(100%, 310px);
+    height: 370px;
+
+    border: 1px solid #cdbb96;
+    padding: 9px;
+    margin: 28px auto;
+
+    background: #eee8dc;
+}
+
+.photo-inner {
+    height: 100%;
+
+    display: grid;
+    place-content: center;
+
+    border: 1px dashed #c7b895;
+    color: #777f71;
+
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 27px;
+}
+
+.photo-inner small {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    margin-top: 10px;
+}
+
+/* Optional: Use when adding your photograph */
+
+.couple-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+/* =========================================
+   11. WEDDING DETAILS
+========================================= */
+
+.details {
+    background: #fffdf9;
+}
+
+.details .event {
+    border-top: 1px solid #e1d5bb;
+    padding: 28px 0;
+}
+
+.details .event:last-of-type {
+    border-bottom: 1px solid #e1d5bb;
+}
+
+.event h3 {
+    margin: 7px 0;
+}
+
+.event p {
+    line-height: 1.7;
+}
+
+/* =========================================
+   12. COUNTDOWN
+========================================= */
+
+.countdown {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 9px;
+
+    margin: 30px auto;
+    max-width: 380px;
+}
+
+.countdown div {
+    padding: 13px 4px;
+    border: 1px solid #dacbad;
+}
+
+.countdown strong {
+    display: block;
+
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 33px;
+    font-weight: 500;
+}
+
+.countdown span {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+/* =========================================
+   13. ACTION BUTTONS
+========================================= */
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    margin-top: 28px;
+}
+
+.actions .btn {
+    min-width: 225px;
+}
+
+/* =========================================
+   14. FOOTER
+========================================= */
+
+.footer {
+    background: var(--sage);
+    color: #fffaf0;
+    padding: 58px 25px;
+}
+
+.footer h2 {
+    font-size: 47px;
+}
+
+.footer p {
+    color: #e6e8dd;
+}
+
+/* =========================================
+   15. NOTIFICATIONS
+========================================= */
+
+.toast {
+    position: fixed;
+    bottom: 18px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    background: #344139;
+    color: white;
+
+    padding: 12px 16px;
+    max-width: 90vw;
+
+    z-index: 10;
+    display: none;
+
+    text-align: center;
+    font-size: 12px;
+}
+
+/* =========================================
+   16. RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 360px) {
+    section {
+        padding: 60px 22px;
+    }
+
+    .frame {
+        min-height: 570px;
+    }
+
+    h1 {
+        font-size: 55px;
+    }
+}
+
+/* =========================================
+   17. ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
