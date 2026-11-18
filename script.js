@@ -23,7 +23,7 @@ const CONFIG = {
     // without the + symbol.
     // Example: '919876543210'
 
-    rsvpPhone: '',
+    rsvpPhone: '917510859589',
 
     // Calendar event times are in UTC.
     // 12:00 PM IST = 06:30 AM UTC.
@@ -310,3 +310,33 @@ rsvpButton.addEventListener(
     'click',
     sendRSVP
 );
+
+
+/* =========================================
+   PHOTO SLIDESHOW
+========================================= */
+
+const slideshowImages = document.querySelectorAll(
+    '.photo-slideshow .couple-image'
+);
+
+let currentSlide = 0;
+
+function showNextSlide() {
+
+    if (slideshowImages.length < 2) {
+        return;
+    }
+
+    slideshowImages[currentSlide].classList.remove('active');
+
+    currentSlide = (currentSlide + 1) % slideshowImages.length;
+
+    slideshowImages[currentSlide].classList.add('active');
+}
+
+// Automatically change every 4 seconds.
+
+if (slideshowImages.length > 1) {
+    setInterval(showNextSlide, 4000);
+}
