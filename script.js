@@ -46,8 +46,6 @@ const mainContent = document.getElementById('main');
 
 const calendarButton = document.getElementById('calendar');
 
-const rsvpButton = document.getElementById('rsvp');
-
 const toastElement = document.getElementById('toast');
 
 
@@ -246,70 +244,6 @@ calendarButton.addEventListener(
 );
 
 
-/* =========================================
-   7. WHATSAPP RSVP
-
-   Opens WhatsApp with a prefilled
-   RSVP message.
-========================================= */
-
-function sendRSVP() {
-
-    // Message sent by guests.
-
-    const message =
-        `Hello! I received ${CONFIG.coupleNames}'s ` +
-        'wedding invitation for 23 December 2026. ' +
-        'I would like to RSVP: ' +
-        '[Attending / Unable to attend]. ' +
-        'Guests: [number].';
-
-    // Encode the message for use in a URL.
-
-    const encodedMessage = encodeURIComponent(message);
-
-    let whatsappURL;
-
-    // If a phone number has been configured,
-    // send the message to that number.
-
-    if (CONFIG.rsvpPhone) {
-
-        whatsappURL =
-            `https://wa.me/${CONFIG.rsvpPhone}` +
-            `?text=${encodedMessage}`;
-
-    } else {
-
-        // Without a configured number,
-        // WhatsApp will prompt the guest
-        // to choose a contact.
-
-        whatsappURL =
-            'https://api.whatsapp.com/send?text=' +
-            encodedMessage;
-
-        showToast(
-            'RSVP number is not configured. ' +
-            'Please add a WhatsApp number before publishing.'
-        );
-
-    }
-
-    // Open WhatsApp.
-
-    window.open(
-        whatsappURL,
-        '_blank',
-        'noopener'
-    );
-
-}
-
-rsvpButton.addEventListener(
-    'click',
-    sendRSVP
-);
 
 
 /* =========================================
@@ -319,6 +253,13 @@ rsvpButton.addEventListener(
 const slideshowImages = document.querySelectorAll(
     '.photo-slideshow .couple-image'
 );
+
+if (
+    slideshowImages.length > 0 &&
+    !document.querySelector('.photo-slideshow .couple-image.active')
+) {
+    slideshowImages[0].classList.add('active');
+}
 
 let currentSlide = 0;
 
@@ -340,3 +281,151 @@ function showNextSlide() {
 if (slideshowImages.length > 1) {
     setInterval(showNextSlide, 4000);
 }
+
+
+
+/* =========================================
+   INTERACTIVE WEDDING RSVP
+========================================= */
+
+// Get form elements.
+
+const rsvpForm = document.getElementById('rsvp-form');
+
+const guestNameInput = document.getElementById('guest-name');
+
+const guestCountInput = document.getElementById('guest-count');
+
+const guestCountGroup = document.getElementById(
+    'guest-count-group'
+);
+
+const attendanceInputs = document.querySelectorAll(
+    'input[name="attendance"]'
+);
+
+
+/* =========================================
+   SHOW / HIDE GUEST COUNT
+========================================= */
+
+function updateAttendanceFields() {
+
+    const selectedAttendance = document.querySelector(
+        'input[name="attendance"]:checked'
+    );
+
+    const isAttending = selectedAttendance.value === 'yes';
+
+    // Hide guest count when declining.
+
+    guestCountGroup.hidden = !isAttending;
+
+    // Only require guest count when attending.
+
+    guestCountInput.required = isAttending;
+}
+
+// Listen for attendance changes.
+
+attendanceInputs.forEach((input) => {
+
+    input.addEventListener(
+        'change',
+        updateAttendanceFields
+    );
+
+});
+
+// Initialize form state.
+
+updateAttendanceFields();
+
+
+/* =========================================
+   SUBMIT RSVP THROUGH WHATSAPP
+========================================= */
+
+function submitRSVP(event) {
+
+    // Prevent the browser from refreshing.
+
+    event.preventDefault();
+
+    // Read guest information.
+
+    const guestName = guestNameInput.value.trim();
+
+    const attendance = document.querySelector(
+        'input[name="attendance"]:checked'
+    ).value;
+
+    const isAttending = attendance === 'yes';
+
+    const guestCount = isAttending
+        ? guestCountInput.value
+        : '0';
+
+    // Validate guest name.
+
+    if (!guestName) {
+
+        showToast('Please enter your name.');
+
+        guestNameInput.focus();
+
+        return;
+    }
+
+    // Configure recipient.
+
+    
+    const phone = String(CONFIG.rsvpPhone).replace(/\D/g, '');
+
+    if (!/^\d{10,15}$/.test(phone)) {
+        showToast(
+            'Please configure a valid WhatsApp number with country code.'
+        );
+        return;
+    }
+
+
+    // Format attendance response.
+
+    const attendanceText = isAttending
+        ? 'Joyfully Accepts'
+        : 'Regretfully Declines';
+
+    // Create RSVP message.
+
+    const message = [
+        '💍 WEDDING RSVP',
+        '',
+        `Wedding: ${CONFIG.coupleNames}`,
+        'Date: 23 December 2026',
+        '',
+        `Guest Name: ${guestName}`,
+        `Attendance: ${attendanceText}`,
+        `Number of Guests: ${guestCount}`,
+        '',
+        'Thank you for the invitation! ❤️'
+    ].join('\n');
+
+    // Generate WhatsApp URL.
+
+    const whatsappURL =
+        `https://wa.me/${phone}?text=` +
+        encodeURIComponent(message);
+
+    // Open WhatsApp.
+
+    window.location.href = whatsappURL;
+
+}
+
+// Attach submit event.
+
+rsvpForm.addEventListener(
+    'submit',
+    submitRSVP
+);

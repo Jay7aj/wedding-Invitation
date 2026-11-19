@@ -197,8 +197,9 @@
                     </h3>
 
                     <p class="small">
-                        Reception timing and venue details<br>
-                        will be announced.
+                        06:00 PM<br>
+                        Marina Convention Centre<br>
+                        Thoppumpady, Ernakulam
                     </p>
 
                 </div>
@@ -209,7 +210,7 @@
 
                     <a
                         class="btn"
-                        href="https://www.google.com/maps/search/?api=1&query=Mia%20Garden%20Palluruthy%20Kerala"
+                        href="https://maps.app.goo.gl/qPMVGAGmADSERCwu9"
                         target="_blank"
                         rel="noopener"
                     >
@@ -290,33 +291,110 @@
                     We look forward to seeing you there.
                 </p>
 
-                <div class="actions">
+                
+<!-- =====================================
+     WEDDING RSVP FORM
+====================================== -->
 
-                    <button
-                        class="btn"
-                        id="rsvp"
-                        style="
-                            background: #fffaf0;
-                            color: #344139;
-                            border-color: #fffaf0;
-                        "
-                    >
-                        RSVP via WhatsApp
-                    </button>
+    <form id="rsvp-form" class="rsvp-form">
 
-                </div>
+        <p class="eyebrow">Kindly respond</p>
 
-                <p
-                    class="note"
-                    style="
-                        color: #e4e9dd;
-                        margin-top: 20px;
-                    "
+        <h3>Will You Join Us?</h3>
+
+        <!-- Guest Name -->
+
+        <div class="form-group">
+
+            <label for="guest-name">
+                Your Name
+            </label>
+
+            <input
+                type="text"
+                id="guest-name"
+                name="guestName"
+                placeholder="Enter your full name"
+                autocomplete="name"
+                maxlength="100"
+                required
+            >
+
+        </div>
+
+        <!-- Attendance -->
+
+        <fieldset class="form-group attendance-group">
+
+            <legend>Will you be attending?</legend>
+
+            <label class="radio-option">
+
+                <input
+                    type="radio"
+                    name="attendance"
+                    value="yes"
+                    checked
                 >
-                    RSVP opens WhatsApp with a prefilled
-                    message. A recipient number can be
-                    configured before publishing.
-                </p>
+
+                <span>Joyfully Accepts</span>
+
+            </label>
+
+            <label class="radio-option">
+
+                <input
+                    type="radio"
+                    name="attendance"
+                    value="no"
+                >
+
+                <span>Regretfully Declines</span>
+
+            </label>
+
+        </fieldset>
+
+        <!-- Number of Guests -->
+
+        <div class="form-group" id="guest-count-group">
+
+            <label for="guest-count">
+                Number of Guests
+            </label>
+
+            <select
+                id="guest-count"
+                name="guestCount"
+                required
+            >
+                <option value="1">1 Guest</option>
+                <option value="2">2 Guests</option>
+                <option value="3">3 Guests</option>
+                <option value="4">4 Guests</option>
+                <option value="5">5 Guests</option>
+            </select>
+
+        </div>
+
+        <!-- Submit -->
+
+        <button
+            type="submit"
+            class="btn rsvp-submit"
+        >
+            Confirm via WhatsApp
+        </button>
+
+        <p class="rsvp-note">
+            Your response will open WhatsApp.
+            Please press Send to confirm your RSVP.
+        </p>
+
+    </form>
+
+
+                
 
             </section>
 

@@ -595,3 +595,135 @@ section {
         scroll-behavior: auto !important;
     }
 }
+
+
+/* =========================================
+   RSVP FORM
+========================================= */
+
+.rsvp-form {
+    width: 100%;
+    max-width: 360px;
+    margin: 35px auto 0;
+    padding: 28px 22px;
+
+    border: 1px solid rgba(255, 250, 240, 0.45);
+    background: rgba(255, 255, 255, 0.08);
+
+    text-align: left;
+}
+
+.rsvp-form h3 {
+    color: #fffaf0;
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.rsvp-form .eyebrow {
+    color: #e1d2b0;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group > label,
+.attendance-group legend {
+    display: block;
+    margin-bottom: 10px;
+
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+
+    color: #fffaf0;
+}
+
+.form-group input[type="text"],
+.form-group select {
+    width: 100%;
+    min-height: 46px;
+
+    padding: 12px 14px;
+
+    border: 1px solid #d5c9ad;
+    border-radius: 2px;
+
+    background: #fffdf8;
+    color: #344139;
+
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: 2px solid #d4bd8b;
+    outline-offset: 2px;
+}
+
+/* Attendance options */
+
+.attendance-group {
+    padding: 0;
+    border: 0;
+    min-width: 0;
+}
+
+.radio-option {
+    display: flex !important;
+    align-items: center;
+
+    gap: 10px;
+    padding: 12px;
+    margin-bottom: 10px !important;
+
+    border: 1px solid rgba(255, 250, 240, 0.35);
+
+    cursor: pointer;
+}
+
+.radio-option input {
+    accent-color: #d4bd8b;
+}
+
+.radio-option span {
+    color: #fffaf0;
+    font-size: 13px;
+}
+
+/* RSVP submit button */
+
+.rsvp-submit {
+    display: block;
+    width: 100%;
+
+    background: #fffaf0;
+    color: #344139;
+    border-color: #fffaf0;
+
+    margin-top: 10px;
+}
+
+.rsvp-submit:hover {
+    background: #e8dcc4;
+    color: #344139;
+}
+
+.rsvp-note {
+    margin: 18px 0 0;
+
+    font-size: 11px;
+    line-height: 1.7;
+    text-align: center;
+
+    color: #e4e9dd;
+}
+
+/* Hidden guest count */
+
+#guest-count-group[hidden] {
+    display: none;
+}
