@@ -69,6 +69,15 @@ function openInvitation() {
         behavior: 'smooth'
     });
 
+    // Start background music
+    const weddingMusic = document.getElementById('wedding-music');
+
+    weddingMusic.volume = 0.35;
+
+    weddingMusic.play().catch((error) => {
+        console.warn('Music playback failed:', error);
+    });
+
 }
 
 openButton.addEventListener(
